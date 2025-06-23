@@ -85,18 +85,7 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-//             when {
-//                 expression { PROD_BUILD == true || TAG_BUILD == true }
-//             }
-            steps {
-                script {
-                    docker.build "${DOCKER_IMAGE_NAME}"
-                }
-            }
-        }
-
-        stage('Push Docker Image') {
+        stage('Build & Push Docker Image') {
 //             when {
 //                 expression { PROD_BUILD == true || TAG_BUILD == true }
 //             }
@@ -110,5 +99,30 @@ pipeline {
                 }
             }
         }
+
+        stage('Update Deployment Manifest & Git Push') {
+                    steps {
+                        script {
+                            withCredentials([string(credentialsId: 'github-pat', variable: 'GITHUB_TOKEN')]) {
+                                sh """
+                                # 1. 저장소 clone
+                                rm -rf app-config
+                                git clone https://${GITHUB_TOKEN}@github.com/LCA-PJT2/app-config.git
+                                cd app-config
+
+                                # 2. image 태그 업데이트
+                                sed -i 's|image: ${DOCKER_REGISTRY}/${APP_NAME}:.*|image: ${DOCKER_REGISTRY}/${APP_NAME}:${APP_VERSION}|' qna-service/prd/qna-service-deploy.yml
+
+                                # 3. Git 설정 및 커밋
+                                git config user.name "bucoco"
+                                git config user.email "nam2660433@gmail.com"
+                                git add qna-service/prd/qna-service-deploy.yml
+                                git commit -m "chore(qna): 버전 업데이트 ${APP_VERSION}"
+                                git push origin main
+                                """
+                            }
+                        }
+                    }
+                }
     }
 }
