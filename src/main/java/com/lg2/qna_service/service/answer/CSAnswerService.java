@@ -141,4 +141,8 @@ public class CSAnswerService {
         }
         csAnswerRepository.deleteById(answerId);
     }
+
+    public void deleteAnswerByUserId(Long userId) {
+        csAnswerRepository.deleteByUserId(userId);
+    }
 }
