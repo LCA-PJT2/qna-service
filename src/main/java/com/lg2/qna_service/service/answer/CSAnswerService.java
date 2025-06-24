@@ -66,7 +66,6 @@ public class CSAnswerService {
         return answers.map(answer -> {
             CSQuestion question = answer.getCsQuestion();
             return CSAnswerResponse.CSAnswerListResponse.builder()
-                    .user_nickname(answer.getUserNickname())
                     .csquestion_id(question.getId())
                     .csquestion_category(question.getCategory())
                     .csquestion_content(question.getContent())
