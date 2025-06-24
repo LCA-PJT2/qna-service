@@ -16,6 +16,6 @@ public class QnaBackendUserController {
     @PostMapping("/user/clear/{userId}")
     public ApiResponseDto<String> deleteAnswer(@PathVariable("userId") Long userId) {
         csAnswerService.deleteAnswerByUserId(userId);
-        return ApiResponseDto.createOk("success");
+        return ApiResponseDto.defaultOk();
     }
 }
