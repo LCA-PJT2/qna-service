@@ -19,5 +19,6 @@ public interface CSAnswerRepository extends JpaRepository<CSAnswer, Long> {
 
 
     void deleteById(Long id);
+    void deleteByCsQuestion(CSQuestion csQuestion);
     void deleteByUserId(Long userId);
 }
