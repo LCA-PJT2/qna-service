@@ -21,7 +21,7 @@ public class CSAnswer {
     private String content;
 
     @Lob
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT",nullable = false)
     private String feedback;
 
     @Column(nullable = false)
