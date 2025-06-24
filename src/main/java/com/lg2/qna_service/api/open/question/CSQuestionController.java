@@ -1,4 +1,4 @@
-package com.lg2.qna_service.controller.question;
+package com.lg2.qna_service.api.open.question;
 
 import com.lg2.qna_service.domain.dto.csQuestion.CSQuestionResponse;
 import com.lg2.qna_service.global.code.GeneralSuccessCode;
@@ -11,11 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/questions")
+@RequestMapping(value = "/api/question/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CSQuestionController {
 
     @Autowired
@@ -46,7 +47,7 @@ public class CSQuestionController {
         return ResponseEntity.ok(CustomResponse.ok(question));
     }
 
-    @PostMapping("/{questionId}/delete")
+    @PostMapping("/delete/{questionId}")
     public ResponseEntity<?> deleteCSQuestion(@PathVariable Long questionId) {
         csQuestionService.deleteQuestion(questionId);
 

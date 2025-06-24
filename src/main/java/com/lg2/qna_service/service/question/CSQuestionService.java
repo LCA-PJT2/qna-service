@@ -80,10 +80,14 @@ public class CSQuestionService {
         return res;
     }
 
+    public boolean existsCSQuestion(Long id) {
+        return csQuestionRepository.existsById(id);
+    }
+
     public void deleteQuestion(Long id) {
         CSQuestion q = csQuestionRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("질문이 존재하지 않습니다."));
-
+        csAnswerRepository.deleteByCsQuestion(q);
         csQuestionRepository.delete(q);
     }
 }
