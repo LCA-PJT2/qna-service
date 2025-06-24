@@ -1,4 +1,4 @@
-package com.lg2.qna_service.controller.answer;
+package com.lg2.qna_service.api.open.answer;
 
 import com.lg2.qna_service.domain.dto.csAnswer.CSAnswerRequest;
 import com.lg2.qna_service.domain.dto.csAnswer.CSAnswerResponse;
@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/answer")
+@RequestMapping(value = "/api/answer/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CSAnswerController {
 
     @Autowired
@@ -62,7 +63,7 @@ public class CSAnswerController {
     }
 
     // 답변 수정
-    @PostMapping("/{answerId}/edit")
+    @PostMapping("/update/{answerId}")
     public ResponseEntity<CustomResponse<CSAnswerResponse.CSAnswerDetailResponse>> updateAnswer(
             @PathVariable Long answerId,
             @RequestBody CSAnswerRequest.CSAnswerUpdate request) {
@@ -72,7 +73,7 @@ public class CSAnswerController {
     }
 
     // 답변 삭제
-    @PostMapping("/{answerId}/delete")
+    @PostMapping("/delete/{answerId}")
     public ResponseEntity<CustomResponse<Void>> deleteAnswer(@PathVariable Long answerId) {
         csAnswerService.deleteAnswer(answerId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
