@@ -2,10 +2,12 @@ package com.lg2.qna_service.api.backend.user;
 
 import com.lg2.qna_service.common.dto.ApiResponseDto;
 import com.lg2.qna_service.service.answer.CSAnswerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/backend/qna/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class QnaBackendUserController {

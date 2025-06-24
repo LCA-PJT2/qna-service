@@ -4,6 +4,7 @@ import com.lg2.qna_service.common.dto.ApiResponseDto;
 import com.lg2.qna_service.domain.dto.csAnswer.CSAnswerRequest;
 import com.lg2.qna_service.domain.dto.csAnswer.CSAnswerResponse;
 import com.lg2.qna_service.service.answer.CSAnswerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/answer/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CSAnswerController {
